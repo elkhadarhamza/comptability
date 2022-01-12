@@ -1,16 +1,14 @@
-import { Field } from "formik"
-import Input from "./Input"
 import { useContext } from "react"
 import AppContext from "./AppContext"
 
-const Journal = (props) => {
+const Journal = () => {
 const {
     state: { data, totalIn, totalOut }
-    } = useContext(AppContext);
+    } = useContext(AppContext)
 
   return (
       <div className="flex flex-col p-6 border-gray-200">
-        <p className="text-center text-3xl">Dashboard</p>      
+        <p className="text-center text-3xl">Dashboard</p>
         <table className="border-collapse border border-gray-400">
             <thead>
                 <tr>
@@ -22,10 +20,10 @@ const {
             {Object.entries(data).map(
                 ([itemId, { type, description, amount }]) => (
                     <tr key={itemId}>
-                        <td className="border border-gray-300 text-center">{(type === 'in') ? description : ''}</td>
-                        <td className="border border-gray-300 text-center w-1/6">{(type === 'in') ? amount : ''}</td>
-                        <td className="border border-gray-300 text-center">{(type === 'out') ? description : ''}</td>
-                        <td className="border border-gray-300 text-center w-1/6">{(type === 'out') ? amount : ''}</td>
+                        <td className="border border-gray-300 text-center">{(type === "in") ? description : "-"}</td>
+                        <td className="border border-gray-300 text-center w-1/6">{(type === "in") ? amount : "-"}</td>
+                        <td className="border border-gray-300 text-center">{(type === "out") ? description : "-"}</td>
+                        <td className="border border-gray-300 text-center w-1/6">{(type === "out") ? amount : "-"}</td>
                     </tr>
                     )
                 )
@@ -33,14 +31,14 @@ const {
                 <tr>
                     <th className="border border-gray-300 text-center">Total incoming</th>
                     <th className="border border-gray-300 text-center">{totalIn}</th>
-                    <th className="border border-gray-300 text-center">Total outcoming</th>
+                    <th className="border border-gray-300 text-center">Total outgoing</th>
                     <th className="border border-gray-300 text-center">{totalOut}</th>
-                </tr>   
+                </tr>
             </tbody>
         </table>
         <p className="text-center text-2xl">Total = {totalIn - totalOut}</p>
     </div>
-  );
-};
+  )
+}
 
-export default Journal;
+export default Journal

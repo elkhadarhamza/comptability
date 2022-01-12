@@ -1,34 +1,29 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import deepmerge from "deepmerge";
+import { createContext, useCallback, useState } from "react"
+import deepmerge from "deepmerge"
 
-const AppContext = createContext();
+const AppContext = createContext()
 
 const initialState = {
     totalIn : 0,
     totalOut : 0,
-    data : [
-        {
-            type: 'in',
-            description : 'description',
-            amount : 0
-        }
-    ]
+    data : []
 }
 
 export const AppContextProvider = (props) => {
-    const [state, setState] = useState(initialState);
-    const addEntry = useCallback((entry) => {        
+    const [state, setState] = useState(initialState)
+    const addEntry = useCallback((entry) => {
         setState((currentState) =>
             deepmerge(currentState, {
                 data : [{type:entry.type, amount: entry.amount, description: entry.description}],
-                totalIn : 1,
-                totalOut : 2541
+                totalIn : currentState.totalIn + (entry.type === "in" ? +entry.amount : 0),
+                totalOut : currentState.totalOut + (entry.type === "out" ? +entry.amount : 0)
                 }
-            )           
-        );
-      }, []);
-    return (
+            )
+        )
+      }, [])
+
+return (
         <AppContext.Provider {...props} value={{ state , addEntry}} />
-    );
-};
-export default AppContext;
+    )
+}
+export default AppContext

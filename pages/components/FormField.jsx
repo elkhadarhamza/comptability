@@ -1,8 +1,8 @@
-import { Field } from "formik";
-import Input from "./Input";
+import { Field } from "formik"
+import Input from "./Input"
 
 const FormField = (props) => {
-  const { children, as: Component = Input, ...otherProps } = props;
+  const { children, as: Component = Input, ...otherProps } = props
 
   return (
     <label className="block">
@@ -18,7 +18,7 @@ const FormField = (props) => {
         )}
       </Field>
     </label>
-  );
-};
+  )
+}
 
-export default FormField;
+export default FormField

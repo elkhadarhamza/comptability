@@ -1,36 +1,34 @@
-import { Formik } from 'formik'
+import { Formik } from "formik"
 import * as yup from "yup"
 import Button from "./Button"
-import FormField from './FormField'
-import Menu from './Menu'
+import FormField from "./FormField"
+import Menu from "./Menu"
 import { useContext, useCallback } from "react"
 import AppContext from "./AppContext"
 
 export default function Home() {
   const {
-    state: { data, totalIn, totalOut},
     addEntry
-  } = useContext(AppContext);
+  } = useContext(AppContext)
 
   const initialValues = {
-    amount: '',
-    description: '',
-    type: 'in'
-  };
+    amount: "",
+    description: "",
+    type: "in"
+  }
 
   const validationSchema = yup.object().shape({
     amount: yup.number().notOneOf([0]).positive().required().label("Amount"),
     description: yup.string().required().label("Description"),
     type: yup.string().required().label("Entry Type")
-  });
+  })
 
   const handleFormSubmit = useCallback(
-    async (values, { setErrors, setFieldError }) => {      
-      addEntry(values);
-      return true;
+    async (values) => {
+      addEntry(values)
     },
-    []
-  );
+    [addEntry]
+  )
 
 return (
 <div>
@@ -40,7 +38,7 @@ return (
       initialValues={initialValues}
       validationSchema={validationSchema}
     >
-      {({ handleSubmit, isValid, isSubmitting, errors }) =>
+      {({ handleSubmit, isValid, isSubmitting }) =>
         (
           <form
             onSubmit={handleSubmit}
@@ -49,9 +47,9 @@ return (
           >
             <div className="mt-4">
               <span className="text-gray-700">Entry Type</span>
-              <div className="mt-2">
-                <FormField type="radio" className="form-radio" name="type" value="in">INCOMING</FormField>
-                <FormField type="radio" className="form-radio" name="type" value="out">OUTGOING</FormField>              
+              <div className="mt-2 flex">
+                <FormField type="radio" className="form-radio flex-2 px-4 py-2 m-2" name="type" value="in"></FormField> INCOMING
+                <FormField type="radio" className="form-radio flex-2 px-4 py-2 m-2" name="type" value="out"></FormField> OUTGOING
               </div>
             </div>
             <FormField
@@ -68,11 +66,11 @@ return (
             </FormField>
             <Button type="submit" disabled={!isValid || isSubmitting}>
               Add Entry
-            </Button>       
+            </Button>
           </form>
         )
       }
-    </Formik>    
+    </Formik>
   </div>
   )
 }
