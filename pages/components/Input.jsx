@@ -3,8 +3,7 @@ import classNames from "classnames"
 const Input = (props) => {
   const { ...otherProps } = props
 
-
-return (
+  return (
     <input
       {...otherProps}
       className={classNames(
