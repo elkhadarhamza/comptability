@@ -8,13 +8,13 @@ const initialState = {
 }
 
 function MyApp({ Component, pageProps }) {
-  const isServer = typeof window === "undefined";
+  const isServer = typeof window === "undefined"
 
-  const journalData = initialState;
-  
+  let journalData = initialState
+
   if(!isServer) {
-    const str_data = localStorage.getItem('data_journal');
-    journalData = str_data != null ? JSON.parse(str_data) : initialState;
+    const str_data = localStorage.getItem("data_journal")
+    journalData = str_data != null ? JSON.parse(str_data) : initialState
   }
 
   return (

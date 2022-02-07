@@ -4,8 +4,7 @@ import deepmerge from "deepmerge"
 const AppContext = createContext()
 
 export const AppContextProvider = (props) => {
-
-  const [state, setState] = useState(props.journalData);
+  const [state, setState] = useState(props.journalData)
 
   const addEntry = useCallback((entry) => {
     setState((currentState) => {
@@ -21,9 +20,10 @@ export const AppContextProvider = (props) => {
           currentState.totalIn + (entry.type === "in" ? +entry.amount : 0),
         totalOut:
           currentState.totalOut + (entry.type === "out" ? +entry.amount : 0),
-      });
-      localStorage.setItem('data_journal', JSON.stringify(finalState));
-      return finalState;
+      })
+      localStorage.setItem("data_journal", JSON.stringify(finalState))
+
+      return finalState
     }
     )
   }, [])
